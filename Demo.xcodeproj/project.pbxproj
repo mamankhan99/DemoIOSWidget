@@ -18,6 +18,7 @@
 		344A4EC42C5B7F0A00A2D2DA /* AppIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344A4EC32C5B7F0A00A2D2DA /* AppIntent.swift */; };
 		344A4EC62C5B7F0B00A2D2DA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 344A4EC52C5B7F0B00A2D2DA /* Assets.xcassets */; };
 		344A4ECA2C5B7F0B00A2D2DA /* DemoWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 344A4EB82C5B7F0A00A2D2DA /* DemoWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		344A4ED02C5B885800A2D2DA /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344A4ECF2C5B885800A2D2DA /* DataService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		344A4EC32C5B7F0A00A2D2DA /* AppIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppIntent.swift; sourceTree = "<group>"; };
 		344A4EC52C5B7F0B00A2D2DA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		344A4EC72C5B7F0B00A2D2DA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		344A4ECF2C5B885800A2D2DA /* DataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 				344A4EC32C5B7F0A00A2D2DA /* AppIntent.swift */,
 				344A4EC52C5B7F0B00A2D2DA /* Assets.xcassets */,
 				344A4EC72C5B7F0B00A2D2DA /* Info.plist */,
+				344A4ECF2C5B885800A2D2DA /* DataService.swift */,
 			);
 			path = DemoWidget;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 				344A4EC22C5B7F0A00A2D2DA /* DemoWidget.swift in Sources */,
 				344A4EC02C5B7F0A00A2D2DA /* DemoWidgetBundle.swift in Sources */,
 				344A4EC42C5B7F0A00A2D2DA /* AppIntent.swift in Sources */,
+				344A4ED02C5B885800A2D2DA /* DataService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

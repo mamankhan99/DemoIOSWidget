@@ -10,30 +10,48 @@ import SwiftUI
 
 struct Provider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: ConfigurationAppIntent())
+        SimpleEntry(date: Date(), state: "ready", post: nil, configuration: ConfigurationAppIntent())
     }
 
     func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        SimpleEntry(date: Date(), configuration: configuration)
+        SimpleEntry(date: Date(), state: "ready", post:nil, configuration: configuration)
     }
     
     func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
-        var entries: [SimpleEntry] = []
+        do {
+            print("Calling again")
 
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
-        let currentDate = Date()
-        for hourOffset in 0 ..< 5 {
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(date: entryDate, configuration: configuration)
-            entries.append(entry)
+            let items = try await DataService.shared.fetchData()
+
+
+                var entries: [SimpleEntry] = []
+
+                // Generate a timeline consisting of five entries an hour apart, starting from the current date.
+                let currentDate = Date()
+                for hourOffset in 0 ..< 3 {
+                    let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset * 5, to: currentDate)!
+                    let entry = SimpleEntry(date: entryDate, state: "ready", post: items[hourOffset] ,configuration: configuration)
+                    entries.append(entry)
+                }
+
+            return Timeline(entries: entries, policy: .atEnd)
+        } catch {
+            print("❌ Error - \(error)")
+
+            
+            let entry = SimpleEntry(
+                date: Date().advanced(by: -86400), state: "error", post: nil, configuration: ConfigurationAppIntent()
+            )
+
+            return Timeline(entries: [entry], policy: .atEnd)
         }
-
-        return Timeline(entries: entries, policy: .atEnd)
     }
 }
 
 struct SimpleEntry: TimelineEntry {
     let date: Date
+    let state: String
+    let post: Posts?
     let configuration: ConfigurationAppIntent
 }
 
@@ -44,9 +62,11 @@ struct DemoWidgetEntryView : View {
         VStack {
             Text("Time:")
             Text(entry.date, style: .time)
+            
+            Text("STATE:" + entry.state)
 
             Text("Favorite Emoji:")
-            Text(entry.configuration.favoriteEmoji)
+            Text(entry.post?.title ?? "NO post")
         }
     }
 }
@@ -79,6 +99,6 @@ extension ConfigurationAppIntent {
 #Preview(as: .systemSmall) {
     DemoWidget()
 } timeline: {
-    SimpleEntry(date: .now, configuration: .smiley)
-    SimpleEntry(date: .now, configuration: .starEyes)
+    SimpleEntry(date: .now, state: "ready", post: nil, configuration: .smiley)
+    SimpleEntry(date: .now, state: "ready", post: nil, configuration: .starEyes)
 }
